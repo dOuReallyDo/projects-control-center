@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Center Progetti</title>
+  <style>
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0b1220;color:#e5e7eb;margin:0;padding:24px}
+    .wrap{max-width:980px;margin:0 auto}
+    h1{margin:0 0 8px}
+    .muted{color:#94a3b8}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}
+    a{color:#93c5fd;text-decoration:none}
+    a:hover{text-decoration:underline}
+    ul{margin:8px 0 0 16px;padding:0}
+    li{margin:6px 0}
+    .badge{display:inline-block;background:#1f2937;padding:3px 8px;border-radius:999px;font-size:12px;margin-left:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Centro di Controllo Progetti</h1>
+    <p class="muted">Accesso unificato ai progetti Cloudflare e Vercel/Supabase. Nessuna modifica ai deployment esistenti di Bollette/Leowander.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Cloudflare <span class="badge">live</span></h2>
+        <ul>
+          <li><a href="https://pdv.mailittlexp.org" target="_blank" rel="noopener">PDV Footprint</a></li>
+          <li><a href="https://coverage.mailittlexp.org" target="_blank" rel="noopener">Network Coverage</a></li>
+          <li><a href="https://cbmkt.mailittlexp.org" target="_blank" rel="noopener">CBMKT</a></li>
+          <li><a href="https://vtop.mailittlexp.org" target="_blank" rel="noopener">VTOP / HVC</a></li>
+          <li><a href="https://windtre-bill-intelligence-mockup-neo.pages.dev" target="_blank" rel="noopener">WindTre Bill Mockup NEO</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Vercel / Supabase <span class="badge">live</span></h2>
+        <ul>
+          <li><a href="https://windtre-bill-intelligence.vercel.app" target="_blank" rel="noopener">Bollette Luce W3 (Vercel)</a></li>
+          <li><a href="https://leowander-destination.vercel.app" target="_blank" rel="noopener">Leowander Destination (Vercel)</a></li>
+          <li><a href="https://dealer-sales-support-poc-theta.vercel.app/admin/login" target="_blank" rel="noopener">Dealer Support</a></li>
+          <li><a href="https://app.supabase.com/project/vibwqchjbhtfytzhcjsl" target="_blank" rel="noopener">Supabase Project Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>🔐 Unified Access Auth <span class="badge">live</span></h2>
+      <p class="muted">Autenticazione centralizzata — OTP + approvazione Telegram.</p>
+      <ul>
+        <li><a href="https://unified-access-auth-woad.vercel.app" target="_blank" rel="noopener">Dashboard Auth</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=bollette" target="_blank" rel="noopener">Login → Bollette</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=cbmkt" target="_blank" rel="noopener">Login → CBMKT</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=coverage" target="_blank" rel="noopener">Login → Coverage</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=dealer-support" target="_blank" rel="noopener">Login → Dealer Support</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=pdv" target="_blank" rel="noopener">Login → PDV</a></li>
+        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=vtop" target="_blank" rel="noopener">Login → VTOP</a></li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h2>Nota sicurezza</h2>
+      <p class="muted">Questo centro è pensato per essere protetto con Cloudflare Access (login obbligatorio, OTP/passkey). Le policy di blocco accesso diretto sui singoli domini Cloudflare vanno applicate lato Zero Trust.</p>
+    </div>
+  </div>
+</body>
+</html>
