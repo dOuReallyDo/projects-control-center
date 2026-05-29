@@ -3,66 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Control Center Progetti</title>
+  <title>Control Center</title>
   <style>
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#0b1220;color:#e5e7eb;margin:0;padding:24px}
-    .wrap{max-width:980px;margin:0 auto}
-    h1{margin:0 0 8px}
-    .muted{color:#94a3b8}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
-    .card{background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}
-    a{color:#93c5fd;text-decoration:none}
-    a:hover{text-decoration:underline}
-    ul{margin:8px 0 0 16px;padding:0}
-    li{margin:6px 0}
-    .badge{display:inline-block;background:#1f2937;padding:3px 8px;border-radius:999px;font-size:12px;margin-left:8px}
+    :root {
+      --bg: #0b1220;
+      --card: #111827;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #93c5fd;
+      --green: #34d399;
+      --red: #f87171;
+      --amber: #fbbf24;
+    }
+    * { box-sizing: border-box }
+    body { font-family: Inter, system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 24px }
+    .wrap { max-width: 980px; margin: 0 auto }
+    h1 { margin: 0 0 4px; font-size: 1.5rem }
+    .subtitle { color: var(--muted); margin: 0 0 24px; font-size: 0.85rem }
+    .muted { color: var(--muted) }
+    .section-title { font-size: 1.1rem; margin: 24px 0 12px; display: flex; align-items: center; gap: 8px }
+    .section-title:first-of-type { margin-top: 0 }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr } }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; transition: border-color 0.2s }
+    .card:hover { border-color: #374151 }
+    .card h2 { margin: 0 0 4px; font-size: 0.95rem }
+    .card .desc { color: var(--muted); font-size: 0.8rem; margin: 0 0 10px }
+    a { color: var(--accent); text-decoration: none }
+    a:hover { text-decoration: underline }
+    ul { margin: 0; padding: 0 0 0 16px; list-style: none }
+    ul li { position: relative; margin: 6px 0 }
+    ul li::before { content: "→"; position: absolute; left: -14px; color: var(--muted); font-size: 0.75rem }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; margin-left: 6px; text-transform: uppercase }
+    .badge-live { background: rgba(52,211,153,0.15); color: var(--green) }
+    .badge-auth { background: rgba(147,197,253,0.15); color: var(--accent) }
+    .badge-pub { background: rgba(251,191,36,0.15); color: var(--amber) }
+    .badge-admin { background: rgba(248,113,113,0.15); color: var(--red) }
+    .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 4px }
+    .status-on { background: var(--green) }
+    .footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.75rem; text-align: center }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Centro di Controllo Progetti</h1>
-    <p class="muted">Accesso unificato ai progetti Cloudflare e Vercel/Supabase. Nessuna modifica ai deployment esistenti di Bollette/Leowander.</p>
+    <h1>⬡ Control Center</h1>
+    <p class="subtitle">Accesso unificato ai progetti · Aggiornato giugno 2025</p>
 
+    <!-- PROGETTI PROTETTI (Unified Auth) -->
+    <div class="section-title">🔒 Progetti Protetti <span class="badge badge-auth">auth</span></div>
+    <p class="muted" style="margin:-8px 0 12px;font-size:0.8rem">Tutti passano per Unified Auth (OTP + approvazione Telegram)</p>
     <div class="grid">
       <div class="card">
-        <h2>Cloudflare <span class="badge">live</span></h2>
-        <ul>
-          <li><a href="https://pdv.mailittlexp.org" target="_blank" rel="noopener">PDV Footprint</a></li>
-          <li><a href="https://coverage.mailittlexp.org" target="_blank" rel="noopener">Network Coverage</a></li>
-          <li><a href="https://cbmkt.mailittlexp.org" target="_blank" rel="noopener">CBMKT</a></li>
-          <li><a href="https://vtop.mailittlexp.org" target="_blank" rel="noopener">VTOP / HVC</a></li>
-          <li><a href="https://windtre-bill-intelligence-mockup-neo.pages.dev" target="_blank" rel="noopener">WindTre Bill Mockup NEO</a></li>
-        </ul>
+        <h2>PDV Footprint <span class="badge badge-live">live</span></h2>
+        <p class="desc">Mappa PDV e footprint di copertura.</p>
+        <ul><li><a href="https://pdv.mailittlexp.org" target="_blank" rel="noopener">Apri PDV Footprint</a></li></ul>
       </div>
-
       <div class="card">
-        <h2>Vercel / Supabase <span class="badge">live</span></h2>
-        <ul>
-          <li><a href="https://windtre-bill-intelligence.vercel.app" target="_blank" rel="noopener">Bollette Luce W3 (Vercel)</a></li>
-          <li><a href="https://leowander-destination.vercel.app" target="_blank" rel="noopener">Leowander Destination (Vercel)</a></li>
-          <li><a href="https://dealer-sales-support-poc-theta.vercel.app/admin/login" target="_blank" rel="noopener">Dealer Support</a></li>
-          <li><a href="https://app.supabase.com/project/vibwqchjbhtfytzhcjsl" target="_blank" rel="noopener">Supabase Project Dashboard</a></li>
-        </ul>
+        <h2>CBMKT <span class="badge badge-live">live</span></h2>
+        <p class="desc">Dashboard commerciale e KPI marketing.</p>
+        <ul><li><a href="https://cbmkt.mailittlexp.org" target="_blank" rel="noopener">Apri CBMKT</a></li></ul>
+      </div>
+      <div class="card">
+        <h2>Network Coverage <span class="badge badge-live">live</span></h2>
+        <p class="desc">Mappa di copertura di rete.</p>
+        <ul><li><a href="https://coverage.mailittlexp.org" target="_blank" rel="noopener">Apri Coverage</a></li></ul>
+      </div>
+      <div class="card">
+        <h2>VTOP / HVC <span class="badge badge-live">live</span></h2>
+        <p class="desc">Top value customers e segmentazione.</p>
+        <ul><li><a href="https://vtop.mailittlexp.org" target="_blank" rel="noopener">Apri VTOP</a></li></ul>
+      </div>
+      <div class="card">
+        <h2>Bollette Luce W3 <span class="badge badge-live">live</span></h2>
+        <p class="desc">Intelligence bollette energia W3.</p>
+        <ul><li><a href="https://windtre-bill-intelligence-mockup-neo.pages.dev" target="_blank" rel="noopener">Apri Bollette</a></li></ul>
+      </div>
+      <div class="card">
+        <h2>Dealer Support <span class="badge badge-live">live</span></h2>
+        <p class="desc">Supporto dealer e sales enablement.</p>
+        <ul><li><a href="https://dealer-sales-support-poc-theta.vercel.app" target="_blank" rel="noopener">Apri Dealer Support</a></li></ul>
       </div>
     </div>
 
-    <div class="card" style="margin-top:16px">
-      <h2>🔐 Unified Access Auth <span class="badge">live</span></h2>
-      <p class="muted">Autenticazione centralizzata — OTP + approvazione Telegram.</p>
-      <ul>
-        <li><a href="https://unified-access-auth-woad.vercel.app" target="_blank" rel="noopener">Dashboard Auth</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=bollette" target="_blank" rel="noopener">Login → Bollette</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=cbmkt" target="_blank" rel="noopener">Login → CBMKT</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=coverage" target="_blank" rel="noopener">Login → Coverage</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=dealer-support" target="_blank" rel="noopener">Login → Dealer Support</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=pdv" target="_blank" rel="noopener">Login → PDV</a></li>
-        <li><a href="https://unified-access-auth-woad.vercel.app/login?app=vtop" target="_blank" rel="noopener">Login → VTOP</a></li>
-      </ul>
+    <!-- PROGETTI PUBBLICI -->
+    <div class="section-title">🌐 Progetti Pubblici <span class="badge badge-pub">pub</span></div>
+    <div class="grid">
+      <div class="card">
+        <h2>Leowander Destination <span class="badge badge-live">live</span></h2>
+        <p class="desc">App destinazioni di viaggio.</p>
+        <ul><li><a href="https://leowander-destination.vercel.app" target="_blank" rel="noopener">Apri Leowander</a></li></ul>
+      </div>
     </div>
 
-    <div class="card" style="margin-top:16px">
-      <h2>Nota sicurezza</h2>
-      <p class="muted">Questo centro è pensato per essere protetto con Cloudflare Access (login obbligatorio, OTP/passkey). Le policy di blocco accesso diretto sui singoli domini Cloudflare vanno applicate lato Zero Trust.</p>
+    <!-- ADMIN & INFRA -->
+    <div class="section-title">⚙️ Admin e Infrastruttura <span class="badge badge-admin">admin</span></div>
+    <div class="grid">
+      <div class="card">
+        <h2>Unified Auth Dashboard</h2>
+        <p class="desc">Gestione autenticazione centralizzata.</p>
+        <ul><li><a href="https://unified-access-auth-woad.vercel.app" target="_blank" rel="noopener">Auth Dashboard</a></li></ul>
+      </div>
+      <div class="card">
+        <h2>Supabase</h2>
+        <p class="desc">Database e backend dei progetti protetti.</p>
+        <ul><li><a href="https://app.supabase.com/project/vibwqchjbhtfytzhcjsl" target="_blank" rel="noopener">Supabase Dashboard</a></li></ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      Control Center · mailittlexp.org · Protetto da Cloudflare Zero Trust
     </div>
   </div>
 </body>
