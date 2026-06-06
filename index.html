@@ -5,34 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Control Center · mailittlexp</title>
   <meta name="description" content="Accesso unificato ai progetti mailittlexp" />
-  <meta name="theme-color" content="#0b1220" />
+  <meta name="theme-color" content="#ea580c" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b1220;
-      --surface: #111827;
-      --border: #1f2937;
-      --border-hover: #374151;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #93c5fd;
-      --green: #34d399;
-      --green-dim: rgba(52,211,153,0.15);
-      --red: #f87171;
-      --red-dim: rgba(248,113,113,0.15);
-      --amber: #fbbf24;
-      --amber-dim: rgba(251,191,36,0.15);
-      --accent-dim: rgba(147,197,253,0.15);
+      /* WINDTRE luce&gas light theme */
+      --bg: #f0fdf4;
+      --surface: #ffffff;
+      --border: #ffedd5;
+      --border-hover: #fdba74;
+      --text: #0f172a;
+      --muted: #64748b;
+      --accent: #ea580c;
+      --green: #16a34a;
+      --green-dim: rgba(22,163,74,0.12);
+      --red: #dc2626;
+      --red-dim: rgba(220,38,38,0.10);
+      --amber: #d97706;
+      --amber-dim: rgba(217,119,6,0.12);
+      --accent-dim: rgba(234,88,12,0.12);
+      --shadow: 0 6px 20px rgba(15,23,42,0.06);
       --radius: 12px;
       --transition: 0.2s ease;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--bg); color: var(--text);
+      background: linear-gradient(180deg, #f0fdf4 0%, #ecfdf5 100%);
+      background-attachment: fixed;
+      color: var(--text);
       min-height: 100vh; padding: 24px;
       -webkit-font-smoothing: antialiased;
     }
@@ -69,10 +73,11 @@
     .card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: var(--radius); padding: 16px;
-      transition: border-color var(--transition), transform var(--transition);
+      box-shadow: var(--shadow);
+      transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
       position: relative;
     }
-    .card:hover { border-color: var(--border-hover); transform: translateY(-1px) }
+    .card:hover { border-color: var(--border-hover); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(234,88,12,0.10) }
     .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px }
     .card h2 { font-size: 0.95rem; font-weight: 600 }
     .card .desc { color: var(--muted); font-size: 0.78rem; margin-bottom: 12px; line-height: 1.4 }
@@ -154,9 +159,21 @@
     </header>
 
     <!-- PROGETTI PROTETTI (via UAA) -->
-    <div class="section-title">🔒 Progetti Protetti <span class="badge badge-auth">auth</span></div>
-    <p class="section-hint">Accesso tramite Unified Auth — OTP + approvazione Telegram</p>
+    <div class="section-title">📊 Progetti & Dashboard <span class="badge badge-live">live</span></div>
+    <p class="section-hint">Viste pubbliche aperte · funzioni admin/export sotto <code>/admin</code> (password condivisa)</p>
     <div class="grid">
+
+      <div class="card" data-health="https://configuratore-offerte-w3.pages.dev">
+        <div class="card-header">
+          <h2>Configuratore Offerte W3</h2>
+          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Configuratore di vendita WINDTRE + matrice offerte. Stile luce&amp;gas.</p>
+        <ul class="links">
+          <li><a href="https://configuratore-offerte-w3.pages.dev" target="_blank" rel="noopener">Apri Configuratore</a> <span class="auth-badge-inline">🔑 gated</span></li>
+          <li><a href="https://configuratore-offerte-w3.pages.dev/admin" target="_blank" rel="noopener">Matrice offerte</a> <span class="badge badge-admin">admin</span></li>
+        </ul>
+      </div>
 
       <div class="card" data-health="https://pdv.mailittlexp.org">
         <div class="card-header">
@@ -202,14 +219,14 @@
         </ul>
       </div>
 
-      <div class="card" data-health="https://windtre-bill-intelligence-mockup-neo.pages.dev">
+      <div class="card" data-health="https://bollette-lucew-3.vercel.app">
         <div class="card-header">
-          <h2>Bollette Luce W3</h2>
+          <h2>Bollette Luce &amp; Gas</h2>
           <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
         </div>
-        <p class="desc">Intelligence bollette energia WindTre.</p>
+        <p class="desc">Carica bolletta e scopri il risparmio. Stile WINDTRE luce&amp;gas.</p>
         <ul class="links">
-          <li><a href="https://bollette-lucew-3.vercel.app" target="_blank" rel="noopener">Apri Bollette</a> <span class="auth-badge-inline">🔓 aperto</span></li>
+          <li><a href="https://bollette-lucew-3.vercel.app/entra" target="_blank" rel="noopener">Apri Bollette</a> <span class="auth-badge-inline">🔑 gated</span></li>
         </ul>
       </div>
 
