@@ -2,12 +2,12 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Ctrl Center">
-  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-cc-old.png">
-  <link rel="icon" type="image/png" href="/icons/favicon-cc-old.png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon-cc.png">
+  <link rel="icon" type="image/png" href="/icons/favicon-cc-new.png">
   <title>Control Center · mailittlexp</title>
   <meta name="description" content="Accesso unificato ai progetti mailittlexp" />
   <meta name="theme-color" content="#ea580c" />
@@ -17,7 +17,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      /* WINDTRE luce&gas light theme */
       --bg: #f0fdf4;
       --surface: #ffffff;
       --border: #ffedd5;
@@ -32,6 +31,8 @@
       --amber: #d97706;
       --amber-dim: rgba(217,119,6,0.12);
       --accent-dim: rgba(234,88,12,0.12);
+      --blue: #2563eb;
+      --blue-dim: rgba(37,99,235,0.12);
       --shadow: 0 6px 20px rgba(15,23,42,0.06);
       --radius: 12px;
       --transition: 0.2s ease;
@@ -47,8 +48,19 @@
     }
     .wrap { max-width: 980px; margin: 0 auto }
 
+    /* Search */
+    .search { margin-bottom: 20px; }
+    .search input {
+      width: 100%; padding: 12px 16px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--surface);
+      color: var(--text); font-size: 0.9rem; font-family: inherit; outline: none;
+      transition: border-color var(--transition);
+    }
+    .search input:focus { border-color: var(--accent); }
+    .search input::placeholder { color: var(--muted); }
+
     /* Header */
-    header { margin-bottom: 32px }
+    header { margin-bottom: 24px }
     h1 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em }
     h1 span { color: var(--accent) }
     .subtitle { color: var(--muted); font-size: 0.85rem; margin-top: 4px }
@@ -100,6 +112,7 @@
     .badge-admin { background: var(--red-dim); color: var(--red) }
     .badge-off  { background: var(--red-dim); color: var(--red) }
     .badge-v2   { background: rgba(148,163,184,0.12); color: var(--muted) }
+    .badge-tunnel { background: var(--blue-dim); color: var(--blue) }
 
     /* Health indicator */
     .health { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-left: 6px; }
@@ -150,6 +163,7 @@
       from { opacity: 0; transform: translateY(8px) }
       to { opacity: 1; transform: translateY(0) }
     }
+    .hidden { display: none !important }
   </style>
 </head>
 <body>
@@ -162,6 +176,84 @@
         <span id="health-text">Verifica stati…</span>
       </div>
     </header>
+
+    <div class="search">
+      <input type="text" id="search" placeholder="🔍 Cerca progetto..." oninput="filterProjects()" />
+    </div>
+
+    <!-- LOCAL TUNNEL APPS -->
+    <div class="section-title">🖥️ Local Tunnel Apps <span class="badge badge-tunnel">tunnel</span></div>
+    <p class="section-hint">App sul Mac mini, esposte via Cloudflare Tunnel. Se il Mac è spento, queste app non sono raggiungibili. LaunchAgent le riavvia automaticamente ad ogni boot.</p>
+    <div class="grid" id="tunnelGrid">
+
+      <div class="card" data-health="https://minute.mailittlexp.org">
+        <div class="card-header">
+          <h2>📋 My Minutes</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Meeting minutes recorder con AI notes, trascrizione e smart-date attribution.</p>
+        <ul class="links">
+          <li><a href="https://minute.mailittlexp.org" target="_blank" rel="noopener">Apri My Minutes</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :8766</span></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://splitease.mailittlexp.org">
+        <div class="card-header">
+          <h2>💰 SplitEase</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Dividi le spese con chi vuoi — gruppi condivisibili via link, scontrini con rimozione sfondo, saldi e settlement ottimizzato.</p>
+        <ul class="links">
+          <li><a href="https://splitease.mailittlexp.org" target="_blank" rel="noopener">Apri SplitEase</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :5555</span></li>
+          <li><a href="https://github.com/dOuReallyDo/SplitEase" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://kanban.mailittlexp.org">
+        <div class="card-header">
+          <h2>📌 Kanban</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-off">off</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Kanban task board — plugin Hermes. Attualmente offline (richiede dashboard Hermes su :5001).</p>
+        <ul class="links">
+          <li><a href="https://kanban.mailittlexp.org" target="_blank" rel="noopener">Apri Kanban</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :5001</span></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://obsidian.mailittlexp.org">
+        <div class="card-header">
+          <h2>📝 Obsidian Dashboard</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Obsidian vault mobile viewer — accedi alle note dal telefono.</p>
+        <ul class="links">
+          <li><a href="https://obsidian.mailittlexp.org" target="_blank" rel="noopener">Apri Obsidian</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :8765</span></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://ti.mailittlexp.org">
+        <div class="card-header">
+          <h2>⚙️ TI Automation 2.0</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Telefono Incluso Suite — simulazione economics, generazione fasce IT, storicizzazione sessioni e verifica golden-file.</p>
+        <ul class="links">
+          <li><a href="https://ti.mailittlexp.org" target="_blank" rel="noopener">Apri TI Automation</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :5002</span></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://term.mailittlexp.org">
+        <div class="card-header">
+          <h2>🖥️ Web Terminal</h2>
+          <span><span class="badge badge-tunnel">tunnel</span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Terminale SSH via browser (ttyd) — accesso al Mac da remoto.</p>
+        <ul class="links">
+          <li><a href="https://term.mailittlexp.org" target="_blank" rel="noopener">Apri Terminal</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— :8768</span></li>
+        </ul>
+      </div>
+
+    </div>
 
     <!-- PROGETTI PROTETTI (via Cloudflare Access) -->
     <div class="section-title">📊 Progetti & Dashboard <span class="badge badge-live">live</span></div>
@@ -196,7 +288,7 @@
           <h2>CBMKT</h2>
           <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
         </div>
-        <p class="desc">Dashboard commerciale e KPI marketing.</p>
+        <p class="desc">Dashboard commerciale e KPI marketing multi-operatore.</p>
         <ul class="links">
           <li><a href="https://cbmkt.mailittlexp.org" target="_blank" rel="noopener">Apri CBMKT</a> <span class="auth-badge-inline">🔑 Access</span></li>
         </ul>
@@ -218,7 +310,7 @@
           <h2>VTOP / HVC</h2>
           <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
         </div>
-        <p class="desc">Top value customers e segmentazione.</p>
+        <p class="desc">Top value customers e segmentazione HVC.</p>
         <ul class="links">
           <li><a href="https://vtop.mailittlexp.org" target="_blank" rel="noopener">Apri VTOP</a> <span class="auth-badge-inline">🔑 Access</span></li>
         </ul>
@@ -242,30 +334,7 @@
         </div>
         <p class="desc">Configuratore offerte multi-operatore. Stile WINDTRE, su Cloudflare.</p>
         <ul class="links">
-          <li><a href="https://dealer.mailittlexp.org" target="_blank" rel="noopener">Dealer Support</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— 5 operatori, restyle WINDTRE</span></li>
-        </ul>
-      </div>
-
-      <div class="card" data-health="https://ti.mailittlexp.org">
-        <div class="card-header">
-          <h2>TI Automation 2.0</h2>
-          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
-        </div>
-        <p class="desc">Telefono Incluso Suite — simulazione economics, generazione fasce IT, storicizzazione sessioni e verifica golden-file.</p>
-        <ul class="links">
-          <li><a href="https://ti.mailittlexp.org" target="_blank" rel="noopener">Apri TI Automation</a> <span class="auth-badge-inline">🔑 Access</span></li>
-        </ul>
-      </div>
-
-      <div class="card" data-health="https://splitease.mailittlexp.org">
-        <div class="card-header">
-          <h2>SplitEase</h2>
-          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
-        </div>
-        <p class="desc">Dividi le spese con chi vuoi — gruppi condivisibili via link, scontrini con rimozione sfondo, saldi e settlement ottimizzato.</p>
-        <ul class="links">
-          <li><a href="https://splitease.mailittlexp.org" target="_blank" rel="noopener">Apri SplitEase</a> <span class="auth-badge-inline">🔑 Access</span></li>
-          <li><a href="https://github.com/dOuReallyDo/SplitEase" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://dealer.mailittlexp.org" target="_blank" rel="noopener">Dealer Support</a> <span class="auth-badge-inline">🔑 Access</span> <span class="link-hint">— 5 operatori</span></li>
         </ul>
       </div>
 
@@ -298,6 +367,133 @@
         </ul>
       </div>
 
+      <div class="card" data-health="https://windtre-bill-intelligence.vercel.app">
+        <div class="card-header">
+          <h2>Bollette Luce W3 (Vercel)</h2>
+          <span><span class="badge badge-pub">pub</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Bollette luce WindTre — protetto da password.</p>
+        <ul class="links">
+          <li><a href="https://windtre-bill-intelligence.vercel.app" target="_blank" rel="noopener">Apri Bollette W3</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- PWA & APP PERSONALI -->
+    <div class="section-title">📱 PWA &amp; App Personali <span class="badge badge-v2">v2</span></div>
+    <div class="grid">
+
+      <div class="card" data-health="https://myboringstuff.pages.dev">
+        <div class="card-header">
+          <h2>🔒 MyBoringStuff Vault</h2>
+          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Vault crittografato PWA — documenti OCR, segreti cifrati, meeting recorder.</p>
+        <ul class="links">
+          <li><a href="https://myboringstuff.pages.dev" target="_blank" rel="noopener">Apri Vault</a></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://icon-studio.pages.dev">
+        <div class="card-header">
+          <h2>✨ Icon Studio</h2>
+          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Editor icone PWA per iPhone — genera apple-touch-icon personalizzate.</p>
+        <ul class="links">
+          <li><a href="https://icon-studio.pages.dev" target="_blank" rel="noopener">Apri Icon Studio</a></li>
+        </ul>
+      </div>
+
+      <div class="card" data-health="https://mega-dashboard-cj5.pages.dev">
+        <div class="card-header">
+          <h2>📊 Mega Dashboard</h2>
+          <span><span class="badge badge-live">live</span><span class="health health-loading"></span></span>
+        </div>
+        <p class="desc">Dashboard analytics multi-progetto.</p>
+        <ul class="links">
+          <li><a href="https://mega-dashboard-cj5.pages.dev" target="_blank" rel="noopener">Apri Mega Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>📷 MyBoringScans</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Scanner documenti OCR — PWA mobile-first.</p>
+        <ul class="links">
+          <li><a href="https://myboringscans.pages.dev" target="_blank" rel="noopener">Apri Scans</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>📝 MyBoringNotes</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Note locali cifrate — PWA offline-first.</p>
+        <ul class="links">
+          <li><a href="https://myboringnotes.pages.dev" target="_blank" rel="noopener">Apri Notes</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>🔑 MyBoringPasswords</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Password manager PWA — cifratura AES-256-GCM.</p>
+        <ul class="links">
+          <li><a href="https://myboringpasswords.pages.dev" target="_blank" rel="noopener">Apri Passwords</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>📋 RoutineBoard</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Routine board — traccia abitudini giornaliere.</p>
+        <ul class="links">
+          <li><a href="https://routineboard-1af.pages.dev" target="_blank" rel="noopener">Apri RoutineBoard</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>💰 CashDrop</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Cash drop tracker — traccia entrate/uscite rapide.</p>
+        <ul class="links">
+          <li><a href="https://cashdrop.pages.dev" target="_blank" rel="noopener">Apri CashDrop</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>🔐 VaultPass</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Vault passwords alternativo — PWA.</p>
+        <ul class="links">
+          <li><a href="https://vaultpass-4nd.pages.dev" target="_blank" rel="noopener">Apri VaultPass</a></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h2>💡 W3 Bill Mockup Neo</h2>
+          <span><span class="badge badge-v2">staging</span></span>
+        </div>
+        <p class="desc">Bill intelligence mockup — prototipo WindTre.</p>
+        <ul class="links">
+          <li><a href="https://windtre-bill-intelligence-mockup-neo.pages.dev" target="_blank" rel="noopener">Apri Mockup</a></li>
+        </ul>
+      </div>
+
     </div>
 
     <!-- ADMIN & INFRA -->
@@ -315,7 +511,7 @@
       <div class="card">
         <div class="card-header">
           <h2>Supabase</h2>
-          <span class="badge badge-admin">admin</span>
+          <span><span class="badge badge-admin">admin</span></span>
         </div>
         <p class="desc">Database e backend dei progetti.</p>
         <ul class="links">
@@ -326,7 +522,7 @@
       <div class="card">
         <div class="card-header">
           <h2>Design System</h2>
-          <span class="badge badge-live">v1.0</span>
+          <span><span class="badge badge-live">v1.0</span></span>
         </div>
         <p class="desc">mailxp.css — design system unificato.</p>
         <ul class="links">
@@ -355,6 +551,27 @@
   </div>
 
   <script>
+    // Search filter
+    function filterProjects() {
+      const q = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('.card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.classList.toggle('hidden', !text.includes(q));
+      });
+      // Hide empty sections
+      document.querySelectorAll('.section-title, .section-hint').forEach(el => {
+        const grid = el.nextElementSibling;
+        if (grid && grid.classList.contains('grid')) {
+          const visible = grid.querySelectorAll('.card:not(.hidden)').length;
+          el.classList.toggle('hidden', visible === 0);
+          if (el.classList.contains('section-hint')) {
+            const title = el.previousElementSibling;
+            if (title) title.classList.toggle('hidden', visible === 0);
+          }
+        }
+      });
+    }
+
     // Health check — async, non-blocking
     (async () => {
       const cards = document.querySelectorAll('.card[data-health]');
@@ -372,7 +589,6 @@
           const timer = setTimeout(() => ctrl.abort(), TIMEOUT);
           const res = await fetch(url, { mode: 'no-cors', signal: ctrl.signal });
           clearTimeout(timer);
-          // no-cors returns opaque response — status 0 means it reached the server
           dot.classList.remove('health-loading');
           dot.classList.add('health-ok');
           results.ok++;
